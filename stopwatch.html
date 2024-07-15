@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch</title>
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+   
+        <style>
+
+            * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 100%;
+            height: 100vh;
+            background-image: url("https://th.bing.com/th/id/OIP.wGfpf-A8WlpiFGaYVJYPkwHaEK?rs=1&pid=ImgDetMain");
+            background-position: center;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            padding: 16px;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+            border-radius: 20px;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .time {
+            padding: 16px 0;
+            font-size: 32px;
+        }
+
+        h1,
+        p {
+            color: #f6f6f6;
+        }
+
+        button {
+            padding: 6.4px 16px;
+            padding-top: 12px;
+            margin: 0 3.2px;
+            border-radius: 50px;
+            border: 1px solid #f6f6f6;
+        }
+
+        button:hover {
+            background: linear-gradient(#fbc2eb 0%, #a6c1ee 100%);
+            color: #f6f6f6;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- First create a section in an html document using div tag and then create a class container for the further use to design -->
+    <div class="container">
+        <!-- Second creater a heading using header(1,2,3,4,5,6) tag -->
+        <h1>STOPWATCH</h1>
+        <!-- Third create the digits to work the timmer / create span to section a document -->
+        <p class="time"><span id="minutes">00</span> : <span class="seconds">00</span> : <span id="tens">00</span></p>
+        <!-- fourth create the buttens to start , stop and reset the operations  -->
+        <button id="start"><i class='bx bxs-stopwatch'></i></button>
+        <button id="stop"><i class='bx bx-stop-circle'></i></button>
+        <button id="reset"><i class='bx bx-reset'></i></button>
+    </div>
+    <script>
+        window.onload = function () {
+            let minutes = 0;
+            let seconds = 0;
+            let tens = 0;
+            let appendMinutes = document.getElementById("minutes");
+            let appendSeconds = document.querySelector(".seconds");
+            let appendTens = document.getElementById("tens");
+            let buttonStart = document.getElementById("start");
+            let buttonStop = document.getElementById("stop");
+            let buttonReset = document.getElementById("reset");
+            let Interval;
+    
+            buttonStart.onclick = function () {
+                clearInterval(Interval);
+                Interval = setInterval(startTimer, 10);
+            }
+    
+            buttonStop.onclick = function () {
+                clearInterval(Interval);
+            }
+    
+            buttonReset.onclick = function () {
+                clearInterval(Interval);
+                tens = 0;
+                seconds = 0;
+                minutes = 0;
+                appendTens.innerHTML = "00";
+                appendSeconds.innerHTML = "00";
+                appendMinutes.innerHTML = "00";
+            }
+    
+            function startTimer() {
+                tens++;
+                if (tens < 9) {
+                    appendTens.innerHTML = "0" + tens;
+                }
+                if (tens > 9) {
+                    appendTens.innerHTML = tens;
+                }
+                if (tens > 99) {
+                    seconds++;
+                    appendSeconds.innerHTML = "0" + seconds;
+                    tens = 0;
+                    appendTens.innerHTML = "00";
+                }
+                if (seconds > 9) {
+                    appendSeconds.innerHTML = seconds;
+                }
+                if (seconds > 59) {
+                    minutes++;
+                    appendMinutes.innerHTML = "0" + minutes;
+                    seconds = 0;
+                    appendSeconds.innerHTML = "00";
+                }
+                if (minutes > 9) {
+                    appendMinutes.innerHTML = minutes;
+                }
+            }
+        }
+    </script>
+    
+</body>
+</html>
